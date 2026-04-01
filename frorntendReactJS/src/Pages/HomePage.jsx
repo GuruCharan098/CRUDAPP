@@ -17,6 +17,10 @@ const HomePage = () => {
     }, [])
 
 
+    const handleAdd = () => {
+        setShowPopup(true);
+        setEditUserId(null);
+    }
 
     const save = (data) => {
         if (editUserId) {
@@ -24,13 +28,13 @@ const HomePage = () => {
         } else
             dispatch(addUsers(data));
 
-        showPopup(false);
+        setShowPopup(false);
         setEditUserId(null);
     }
     return (
         <>
             <div>
-                <button>Add Users</button>
+                <button className="add-user-btn" onClick={handleAdd} >Add Users</button>
                 <UserTableComponent
                     users={users}
                     onEdit={(u) => { setEditUserId(u); setShowPopup(true); }}
@@ -38,7 +42,7 @@ const HomePage = () => {
                 />
 
                 {showPopup && <UserModelPopup
-                    user={edit}
+                    user={editUserId}
                     onSave={save}
                     onClose={() => setShowPopup(false)}
                 />}

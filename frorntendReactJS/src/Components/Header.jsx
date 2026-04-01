@@ -1,17 +1,21 @@
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import '../../src/App.css'
+
 const HeaderComponent = () => {
     return (
-        <>
-            <div className="header">
-                <h2>CRUD APPLICATION</h2>
-                <nav>
-                    <Link to='/'>HOME</Link>
-                    <Link to='/about'>ABOUT</Link>
-                </nav>
-            </div>
-        </>
-    )
-}
+        <header className="header">
+            <h2>CRUD APPLICATION</h2>
+
+            <nav>
+                <NavLink to="/" className="nav-link">
+                    HOME
+                </NavLink>
+                <NavLink to="/about" className="nav-link">
+                    ABOUT
+                </NavLink>
+            </nav>
+        </header>
+    );
+};
 
 export default HeaderComponent;

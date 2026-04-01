@@ -1,49 +1,70 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const API = "http://localhost:5000/api/users";
+const API = "http://localhost:5500/api/users";
 
-const getToken = () => localStorage.getItem("token");
-
-export const fetchUsers = createAsyncThunk("fetch", async() => {
-    const res = await axios.get(API, {
-        headers: { Authorization: getToken() }
-    });
+// ✅ GET USERS
+export const fetchUsers = createAsyncThunk("users/fetch", async() => {
+    const res = await axios.get(API);
     return res.data;
 });
 
-export const addUsers = createAsyncThunk("add", async(data) => {
-    const res = await axios.post(API, data, {
-        headers: { Authorization: getToken() }
-    });
+// ✅ ADD USER
+export const addUsers = createAsyncThunk("users/add", async(data) => {
+    const res = await axios.post(API, data);
     return res.data;
 });
 
-export const editUser = createAsyncThunk("edit", async({ id, data }) => {
-    const res = await axios.put(`${API}/${id}`, data, {
-        headers: { Authorization: getToken() }
-    });
+// ✅ EDIT USER
+export const editUser = createAsyncThunk("users/edit", async({ id, data }) => {
+    const res = await axios.put(`${API}/${id}`, data);
     return res.data;
 });
 
-export const deleteUser = createAsyncThunk("delete", async(id) => {
-    await axios.delete(`${API}/${id}`, {
-        headers: { Authorization: getToken() }
-    });
+// ✅ DELETE USER
+export const deleteUser = createAsyncThunk("users/delete", async(id) => {
+    await axios.delete(`${API}/${id}`);
     return id;
 });
 
 const slice = createSlice({
     name: "users",
-    initialState: { list: [] },
-    extraReducers: (b) => {
-        b.addCase(fetchUsers.fulfilled, (s, a) => { s.list = a.payload });
-        b.addCase(addUsers.fulfilled, (s, a) => { s.list.push(a.payload) });
-        b.addCase(editUser.fulfilled, (s, a) => {
-            s.list = s.list.map(u => u._id === a.payload._id ? a.payload : u);
-        });
-        b.addCase(deleteUser.fulfilled, (s, a) => {
-            s.list = s.list.filter(u => u._id !== a.payload);
+    initialState: {
+        list: [],
+        loading: false
+    },
+
+    reducers: {},
+
+    extraReducers: (builder) => {
+        builder
+
+        // FETCH
+            .addCase(fetchUsers.pending, (state) => {
+                state.loading = true;
+            })
+            .addCase(fetchUsers.fulfilled, (state, action) => {
+                state.loading = false;
+                state.list = action.payload;
+            })
+
+        // ADD
+        .addCase(addUsers.fulfilled, (state, action) => {
+            state.list.push(action.payload);
+        })
+
+        // EDIT
+        .addCase(editUser.fulfilled, (state, action) => {
+            state.list = state.list.map((u) =>
+                u._id === action.payload._id ? action.payload : u
+            );
+        })
+
+        // DELETE ✅ FIXED
+        .addCase(deleteUser.fulfilled, (state, action) => {
+            state.list = state.list.filter(
+                (u) => u._id !== action.payload
+            );
         });
     }
 });

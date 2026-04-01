@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-const UserModelPopup = (user, onSave, onClose) => {
+const UserModelPopup = ({ user, onSave, onClose }) => {
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -21,7 +21,7 @@ const UserModelPopup = (user, onSave, onClose) => {
 
                     <input placeholder="Name" value={form.name} onChange={e => setForm({ ...form, name: e.target.value })} />
                     <input placeholder="Email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
-                    <input placeholder="Age" value={form.age} onChange={e => setForm({ ...form, age: e.target.value })} G />
+                    <input placeholder="Age" value={form.age} onChange={e => setForm({ ...form, age: e.target.value })} />
 
                     <button onClick={() => onSave(form)}>Save</button>
                     <button className="delete" onClick={onClose}>Cancel</button>

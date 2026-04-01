@@ -3,18 +3,6 @@ body {
     background: #f5f5f5;
 }
 
-.header {
-    background: green;
-    color: white;
-    padding: 15px;
-    display: flex;
-    justify-content: space-between;
-}
-
-button.delete {
-    background: red;
-}
-
 .modal {
     position: fixed;
     width: 100%;
@@ -27,4 +15,222 @@ button.delete {
     width: 300px;
     margin: 100px auto;
     padding: 20px;
+}
+
+
+/* Container */
+
+.table-container {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+
+/* Table */
+
+.user-table {
+    width: 90%;
+    border-collapse: collapse;
+    font-family: Arial, sans-serif;
+    background: #ffffff;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Header */
+
+.user-table thead {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.user-table th {
+    padding: 12px;
+    text-align: left;
+}
+
+
+/* Body */
+
+.user-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+
+/* Hover effect */
+
+.user-table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+
+/* Actions column */
+
+.actions {
+    display: flex;
+    gap: 10px;
+}
+
+
+/* Buttons */
+
+.btn {
+    padding: 6px 12px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+
+/* Edit Button */
+
+.edit-btn {
+    background-color: #2196F3;
+    color: white;
+}
+
+.edit-btn:hover {
+    background-color: #0b7dda;
+}
+
+
+/* Delete Button */
+
+.delete-btn {
+    background-color: #f44336;
+    color: white;
+}
+
+.delete-btn:hover {
+    background-color: #d32f2f;
+}
+
+
+/* No data row */
+
+.no-data {
+    text-align: center;
+    padding: 15px;
+    font-weight: bold;
+    color: #888;
+}
+
+
+/* Header Container */
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(90deg, #1e293b, #0f172a);
+    color: #ffffff;
+    padding: 15px 40px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Title */
+
+.header h2 {
+    margin: 0;
+    font-size: 22px;
+    letter-spacing: 1px;
+}
+
+
+/* Navigation */
+
+.header nav {
+    display: flex;
+    gap: 25px;
+}
+
+
+/* Links */
+
+.nav-link {
+    text-decoration: none;
+    color: #e2e8f0;
+    font-size: 16px;
+    position: relative;
+    transition: 0.3s;
+}
+
+
+/* Hover underline animation */
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -5px;
+    width: 0%;
+    height: 2px;
+    background: #38bdf8;
+    transition: 0.3s;
+}
+
+.nav-link:hover {
+    color: #38bdf8;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+
+/* Active Link */
+
+.nav-link.active {
+    color: #38bdf8;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+
+/* Add User Button */
+
+.add-user-btn {
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+    color: #ffffff;
+    border: none;
+    padding: 10px 18px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 15px 0;
+    box-shadow: 0 4px 10px rgba(14, 165, 233, 0.3);
+}
+
+
+/* Hover Effect */
+
+.add-user-btn:hover {
+    background: linear-gradient(135deg, #0ea5e9, #0284c7);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(14, 165, 233, 0.4);
+}
+
+
+/* Active (Click) */
+
+.add-user-btn:active {
+    transform: scale(0.97);
+    box-shadow: 0 2px 6px rgba(14, 165, 233, 0.3);
+}
+
+
+/* Focus (Accessibility) */
+
+.add-user-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.4);
 }
