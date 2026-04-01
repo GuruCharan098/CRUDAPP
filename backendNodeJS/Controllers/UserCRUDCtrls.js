@@ -1,16 +1,16 @@
 import UserDB from '../SchemaModel/UserSchema.js';
 
-// ✅ Get all users
+// GET
 export const getUsers = async(req, res) => {
     try {
-        const users = await UserDB.find();
+        const users = await UserDB.find().sort({ createdAt: -1 });
         res.json(users);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
 
-// ✅ Add user
+// ADD
 export const addUsers = async(req, res) => {
     try {
         const user = await UserDB.create(req.body);
@@ -23,7 +23,7 @@ export const addUsers = async(req, res) => {
     }
 };
 
-// ✅ Update user
+// UPDATE
 export const updateUsers = async(req, res) => {
     try {
         const user = await UserDB.findByIdAndUpdate(
@@ -41,7 +41,7 @@ export const updateUsers = async(req, res) => {
     }
 };
 
-// ✅ Delete user
+// DELETE
 export const deleteUsers = async(req, res) => {
     try {
         const user = await UserDB.findByIdAndDelete(req.params.id);
@@ -50,7 +50,7 @@ export const deleteUsers = async(req, res) => {
             return res.status(404).json({ message: "User not found" });
         }
 
-        res.json({ message: "User deleted successfully" });
+        res.json({ message: "Deleted successfully" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

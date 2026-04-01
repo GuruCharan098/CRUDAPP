@@ -8,21 +8,16 @@ const connectDB = async() => {
         const { DB_URL, DB_NAME } = process.env;
 
         if (!DB_URL || !DB_NAME) {
-            throw new Error("Database URL or Name is not defined in environment variables.");
+            throw new Error("Database URL or Name missing");
         }
 
         await mongoose.connect(DB_URL, {
             dbName: DB_NAME,
-            retryWrites: true,
-            serverSelectionTimeoutMS: 10000,
-            connectTimeoutMS: 30000,
-            socketTimeoutMS: 45000,
-            maxPoolSize: 10,
         });
 
-        console.log(`✅ MongoDB connected successfully to database: ${DB_NAME}`);
+        console.log(`✅ MongoDB connected: ${DB_NAME}`);
     } catch (error) {
-        console.error("❌ MongoDB connection error:", error.message);
+        console.error("❌ MongoDB error:", error.message);
         process.exit(1);
     }
 };

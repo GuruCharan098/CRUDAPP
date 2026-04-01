@@ -35,11 +35,11 @@ const HomePage = () => {
         <>
             <div>
                 <button className="add-user-btn" onClick={handleAdd} >Add Users</button>
+
                 <UserTableComponent
                     users={users}
                     onEdit={(u) => { setEditUserId(u); setShowPopup(true); }}
-                    onDelete={() => dispatch(deleteUser(id))}
-                />
+                    onDelete={(id) => dispatch(deleteUser(id))} />
 
                 {showPopup && <UserModelPopup
                     user={editUserId}

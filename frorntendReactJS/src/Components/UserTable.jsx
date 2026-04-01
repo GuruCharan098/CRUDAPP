@@ -9,22 +9,29 @@ export default function UserTableComponent({ users, onEdit, onDelete }) {
                             <th>Name</th>
                             <th>Email</th>
                             <th>Age</th>
+                            <th>Created Date</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         {users.length > 0 ?
                             (users.map((u) => {
-                                <tr key={u._id} >
-                                    <td>{u._id}</td>
-                                    <td>{u.name}</td>
-                                    <td>{u.email}</td>
-                                    <td>{u.age}</td>
-                                    <td className="actions">
-                                        <button className="btn edit-btn" onClick={() => onEdit(u)}>Edit</button>
-                                        <button className="btn delete-btn" onClick={() => onDelete(u._id)}>Delete</button>
-                                    </td>
-                                </tr>
+                                return (
+                                    <tr key={u._id} >
+                                        <td>{u._id}</td>
+                                        <td>{u.name}</td>
+                                        <td>{u.email}</td>
+                                        <td>{u.age}</td>
+                                        <td>
+                                            {new Date(u.createdAt).toLocaleString() || DDMMYYYY}
+                                        </td>
+
+                                        <td className="actions">
+                                            <button className="btn edit-btn" onClick={() => onEdit(u)}>Edit</button>
+                                            <button className="btn delete-btn" onClick={() => onDelete(u._id)}>Delete</button>
+                                        </td>
+                                    </tr>
+                                )
                             })) :
                             (
                                 <tr>
